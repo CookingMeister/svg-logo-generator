@@ -63,21 +63,20 @@ async function promptUser() {
 // Generate SVG
 const init = async () => {
   try {
-    const logo = async () => {
-      await promptUser();
-      return generateLogo(text, textColor, shape, fillColor);
-    };
-    // generateLogo(logo);
+    const { text, textColor, shape, fillColor } = await promptUser();
+    const svg = generateLogo(text, textColor, shape, fillColor);
+
     // Save SVG to file
-    await fs.promises.writeFile(logo, svg);
-    console.log(`Generated ${logo}`);
-  } catch {
+    fs.writeFileSync("logo.svg", svg);
+    console.log(`Generated ${svg}`);
+  } catch (err) {
     console.log(err);
     throw err;
   }
 };
 
 function generateLogo(text, textColor, shape, fillColor) {
+  let svg;
   switch (shape) {
     case "Circle":
       svg = new Circle(fillColor, textColor, text).render();
@@ -88,6 +87,12 @@ function generateLogo(text, textColor, shape, fillColor) {
     case "Square":
       svg = new Square(fillColor, textColor, text).render();
       break;
+    default:
+      return "Invalid shape";      
   }
+  console.log(svg);
+  return svg;
 }
+
+// Call init() to start prompts
 init();
