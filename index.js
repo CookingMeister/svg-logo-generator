@@ -6,7 +6,7 @@ import { Shape, Circle, Triangle, Square } from "./lib/shapes.js";
 // Prompt user for input
 async function promptUser() {
   try {
-    const text = await inquirer.prompt([
+    const answers = await inquirer.prompt([
       {
         type: "input",
         name: "text",
@@ -18,8 +18,6 @@ async function promptUser() {
           return true;
         },
       },
-    ]);
-    const textColor = await inquirer.prompt([
       {
         type: "input",
         name: "textColor",
@@ -31,19 +29,15 @@ async function promptUser() {
           return true;
         },
       },
-    ]);
-    const shape = await inquirer.prompt([
       {
         type: "list",
         name: "shape",
         message: "What shape would you like to generate?",
         choices: ["Circle", "Triangle", "Square"],
       },
-    ]);
-    const fillColor = await inquirer.prompt([
       {
         type: "input",
-        name: "fillColor",
+        name: "color",
         message: "What is the fill color of the shape?",
         validate: (input) => {
           if (validator.isEmpty(input)) {
@@ -53,7 +47,7 @@ async function promptUser() {
         },
       },
     ]);
-    return text, textColor, shape, fillColor;
+    return answers;
   } catch (err) {
     console.log(err);
     throw err;
@@ -63,32 +57,33 @@ async function promptUser() {
 // Generate SVG
 const init = async () => {
   try {
-    const { text, textColor, shape, fillColor } = await promptUser();
-    const svg = generateLogo(text, textColor, shape, fillColor);
+    let answers = await promptUser();
+    const { text, textColor, shape, color } = answers;
+    const svg = generateLogo(text, textColor, shape, color);
 
     // Save SVG to file
     fs.writeFileSync("logo.svg", svg);
-    console.log(`Generated ${svg}`);
+    console.log(`Generated svg logo saved to logo.svg`);
   } catch (err) {
     console.log(err);
     throw err;
   }
 };
 
-function generateLogo(text, textColor, shape, fillColor) {
+function generateLogo(text, textColor, shape, color) {
   let svg;
   switch (shape) {
     case "Circle":
-      svg = new Circle(fillColor, textColor, text).render();
+      svg = new Circle(color, textColor, text).renderSvg();
       break;
     case "Triangle":
-      svg = new Triangle(fillColor, textColor, text).render();
+      svg = new Triangle(color, textColor, text).renderSvg();
       break;
     case "Square":
-      svg = new Square(fillColor, textColor, text).render();
+      svg = new Square(color, textColor, text).renderSvg();
       break;
     default:
-      return "Invalid shape";      
+      return "Invalid shape";
   }
   console.log(svg);
   return svg;
