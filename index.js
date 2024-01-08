@@ -27,8 +27,9 @@ async function promptUser() {
           if (validator.isEmpty(input)) {
             return "Text color cannot be empty";
           }
+          const color = input.toLowerCase();
           const validColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'black', 'white', 'gray'];
-          if(!validColors.includes(input) && !validator.isHexColor(input)) {
+          if(!validColors.includes(color) && !validator.isHexColor(input)) {
             // Value is a valid color name or hex color
             return "Text color must be a valid hex color or color name";
           }
@@ -49,8 +50,9 @@ async function promptUser() {
           if (validator.isEmpty(input)) {
             return "Shape color cannot be empty";
           }
+          const color = input.toLowerCase();
           const validColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'black', 'white', 'gray'];
-          if(!validColors.includes(input) && !validator.isHexColor(input)) {
+          if(!validColors.includes(color) && !validator.isHexColor(input)) {
             // Value is a valid color name or hex color
             return "Color must be a valid hex color or color name";
           }
