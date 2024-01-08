@@ -1,7 +1,8 @@
-import inquirer from "inquirer";
-import validator from "validator";
-import fs from "fs";
-import { Shape, Circle, Triangle, Square } from "./lib/shapes.js";
+const inquirer = require("inquirer");
+const validator = require("validator");
+const fs = require("fs");
+const { Shape, Circle, Triangle, Square } = require("./lib/shapes.js");
+
 
 // Prompt user for input
 async function promptUser() {
