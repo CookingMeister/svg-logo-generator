@@ -13,8 +13,8 @@ async function promptUser() {
         name: "text",
         message: "What are your three characters for the text?",
         validate: (input) => {
-          if (validator.isEmpty(input)) {
-            return "Text cannot be empty";
+          if (!validator.isLength(input, { min: 3, max: 3 })) {
+            return "Text must be exactly 3 characters";
           }
           return true;
         },
@@ -26,6 +26,11 @@ async function promptUser() {
         validate: (input) => {
           if (validator.isEmpty(input)) {
             return "Text color cannot be empty";
+          }
+          const validColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'black', 'white', 'gray'];
+          if(!validColors.includes(input) && !validator.isHexColor(input)) {
+            // Value is a valid color name or hex color
+            return "Text color must be a valid hex color or color name";
           }
           return true;
         },
@@ -43,6 +48,11 @@ async function promptUser() {
         validate: (input) => {
           if (validator.isEmpty(input)) {
             return "Shape color cannot be empty";
+          }
+          const validColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'black', 'white', 'gray'];
+          if(!validColors.includes(input) && !validator.isHexColor(input)) {
+            // Value is a valid color name or hex color
+            return "Color must be a valid hex color or color name";
           }
           return true;
         },
@@ -63,7 +73,7 @@ const init = async () => {
     const svg = generateLogo(text, textColor, shape, color);
 
     // Save SVG to file
-    fs.writeFileSync("logo.svg", svg);
+    fs.writeFileSync("./examples/logo.svg", svg);
     console.log(`Generated svg logo saved to logo.svg`);
   } catch (err) {
     console.log(err);
