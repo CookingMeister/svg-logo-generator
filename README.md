@@ -6,7 +6,7 @@
 
 ## Description
 
-A Node.js command-line application that takes in user input to generate a logo and save it as an SVG file.
+A Node.js command-line application that takes in user input to generate a logo and save it as an SVG file. It uses the Inquirer package to prompt for input, Validator for validation, Jest for testing and fs to save the file.
 
 ## Installation
 
@@ -15,6 +15,7 @@ To install this app, clone the repository and run `npm install` to install depen
 ## Usage
 
 To generate a SVG file, run `node index.js` and follow the prompts. A SVG file will be created in the /examples directory.
+To run testing, run `npm test`.
 
 ## Demo
 
