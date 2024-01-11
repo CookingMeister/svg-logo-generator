@@ -27,6 +27,11 @@ async function promptUser() {
           if (validator.isEmpty(input)) {
             return "Text color cannot be empty";
           }
+          // Check if valid hexidecimal color
+          function isValidHexColor(input) {
+            const regEx = /^#([0-9a-fA-F]{6})$/;
+            return regEx.test(input);
+          }
           const color = input.toLowerCase();
           const validColors = [
             "red",
@@ -40,7 +45,7 @@ async function promptUser() {
             "white",
             "gray",
           ];
-          if (!validColors.includes(color) && !validator.isHexColor(input)) {
+          if (!validColors.includes(color) && !isValidHexColor(input)) {
             // Value is a valid color name or hex color
             return "Text color must be a valid hex color or color name";
           }
@@ -61,6 +66,10 @@ async function promptUser() {
           if (validator.isEmpty(input)) {
             return "Shape color cannot be empty";
           }
+          function isValidHexColor(input) {
+            const regEx = /^#([0-9a-fA-F]{6})$/;
+            return regEx.test(input);
+          }
           const color = input.toLowerCase();
           const validColors = [
             "red",
@@ -74,13 +83,13 @@ async function promptUser() {
             "white",
             "gray",
           ];
-          if (!validColors.includes(color) && !validator.isHexColor(input)) {
+          if (!validColors.includes(color) && !isValidHexColor(input)) {
             // Value is a valid color name or hex color
             return "Color must be a valid hex color or color name";
           }
           return true;
         },
-      },
+      }
     ]);
     return answers;
   // Error handling
