@@ -1,10 +1,10 @@
+// Imports
 const inquirer = require("inquirer");
 const validator = require("validator");
 const fs = require("fs");
 const { Shape, Circle, Triangle, Square } = require("./lib/shapes.js");
 
-
-// Prompt user for input
+// Prompt user for input with answer validation
 async function promptUser() {
   try {
     const answers = await inquirer.prompt([
@@ -28,8 +28,19 @@ async function promptUser() {
             return "Text color cannot be empty";
           }
           const color = input.toLowerCase();
-          const validColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'black', 'white', 'gray'];
-          if(!validColors.includes(color) && !validator.isHexColor(input)) {
+          const validColors = [
+            "red",
+            "orange",
+            "yellow",
+            "green",
+            "blue",
+            "indigo",
+            "violet",
+            "black",
+            "white",
+            "gray",
+          ];
+          if (!validColors.includes(color) && !validator.isHexColor(input)) {
             // Value is a valid color name or hex color
             return "Text color must be a valid hex color or color name";
           }
@@ -51,8 +62,19 @@ async function promptUser() {
             return "Shape color cannot be empty";
           }
           const color = input.toLowerCase();
-          const validColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'black', 'white', 'gray'];
-          if(!validColors.includes(color) && !validator.isHexColor(input)) {
+          const validColors = [
+            "red",
+            "orange",
+            "yellow",
+            "green",
+            "blue",
+            "indigo",
+            "violet",
+            "black",
+            "white",
+            "gray",
+          ];
+          if (!validColors.includes(color) && !validator.isHexColor(input)) {
             // Value is a valid color name or hex color
             return "Color must be a valid hex color or color name";
           }
@@ -61,28 +83,14 @@ async function promptUser() {
       },
     ]);
     return answers;
+  // Error handling
   } catch (err) {
     console.log(err);
     throw err;
   }
 }
 
-// Generate SVG
-const init = async () => {
-  try {
-    let answers = await promptUser();
-    const { text, textColor, shape, color } = answers;
-    const svg = generateLogo(text, textColor, shape, color);
-
-    // Save SVG to file
-    fs.writeFileSync("./examples/logo.svg", svg);
-    console.log(`Generated svg logo saved to logo.svg`);
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
-};
-
+// Render svg according to shape
 function generateLogo(text, textColor, shape, color) {
   let svg;
   switch (shape) {
@@ -98,9 +106,25 @@ function generateLogo(text, textColor, shape, color) {
     default:
       return "Invalid shape";
   }
-  console.log(svg);
   return svg;
 }
 
-// Call init() to start prompts
+// Initiallize prompts, svg generation and write to file
+const init = async () => {
+  try {
+    let answers = await promptUser();
+    const { text, textColor, shape, color } = answers;
+    const svg = generateLogo(text, textColor, shape, color);
+
+    // Save SVG to file
+    fs.writeFileSync("./examples/logo.svg", svg);
+    console.log(`Generated svg saved to examples/logo.svg`);
+    // Error handling
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+// Call to start prompts sequence
 init();
