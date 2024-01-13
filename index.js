@@ -13,8 +13,8 @@ async function promptUser() {
         name: "text",
         message: "What are your three characters for the text?",
         validate: (input) => {
-          if (!validator.isLength(input, { min: 3, max: 3 })) {
-            return "Text must be exactly 3 characters";
+          if (!validator.isLength(input, { min: 1, max: 3 })) {
+            return "Text must be 1 to 3 characters";
           }
           return true;
         },
