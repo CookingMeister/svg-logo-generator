@@ -2,7 +2,7 @@
 
 [![badge](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![npm](https://img.shields.io/badge/npm-v10.2.3-blue.svg)](https://www.npmjs.com)
-[![Nodejs](https://img.shields.io/badge/node.js-v20.10.0-yellow.svg)](https://nodejs.org/)
+[![Nodejs](https://img.shields.io/badge/Node.js-v20.10.0-yellow.svg)](https://nodejs.org/)
 
 ## Description
 
@@ -15,7 +15,10 @@ To install this app, clone the repository and run `npm install` to install depen
 ## Usage
 
 To generate a SVG file, run `node index.js` and follow the prompts. A SVG file will be created in the /examples directory.
-To run testing, run `npm test`.
+
+## Tests
+
+The app has been tested using Jest. To run tests, run `npm test`.
 
 ## Demo
 
@@ -23,7 +26,7 @@ The following video link shows the appearance and functionality of the app: [SVG
 
 ## Credits
 
-This app was created by [CookingMeister](https://github.com/cookingmeister). It uses the inquirer, validator and fs modules. Npmjs.com was referenced for fs, validator and inquirer documentation. W3Schools was also referenced for markdown formatting best practices.
+This app was created by [CookingMeister](https://github.com/cookingmeister). Npmjs.com was referenced for fs, validator and inquirer documentation. W3Schools was also referenced for markdown formatting best practices. Edx was used for learning Jest testing fundamentals.
 
 ## License
 

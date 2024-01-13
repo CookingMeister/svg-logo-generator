@@ -27,7 +27,7 @@ async function promptUser() {
           if (validator.isEmpty(input)) {
             return "Text color cannot be empty";
           }
-          // Check if valid hexidecimal color
+          // Check if valid hexadecimal color
           function isValidHexColor(input) {
             const regEx = /^#([0-9a-fA-F]{6})$/;
             return regEx.test(input);
@@ -118,16 +118,25 @@ function generateLogo(text, textColor, shape, color) {
   return svg;
 }
 
-// Initiallize prompts, svg generation and write to file
+// Initialize prompts, svg generation and write to file
 const init = async () => {
   try {
     let answers = await promptUser();
     const { text, textColor, shape, color } = answers;
-    const svg = generateLogo(text, textColor, shape, color);
 
+    // Generate SVG based on user input
+    const svg = generateLogo(text, textColor, shape, color);
+    
     // Save SVG to file
-    fs.writeFileSync("./examples/logo.svg", svg);
-    console.log(`Generated svg saved to examples/logo.svg`);
+    let destination = "./examples/logo.svg";
+    await fs.promises.writeFile(destination, svg);
+    console.log("Generated logo saved to examples/logo.svg");
+
+    // Check SVG was saved successfully
+    const svgFile = await fs.promises.readFile(destination, 'utf8');
+      if(!svgFile)
+      throw new Error("SVG file was not saved successfully");
+
     // Error handling
   } catch (err) {
     console.log(err);
@@ -135,5 +144,5 @@ const init = async () => {
   }
 };
 
-// Call to start prompts sequence
+// Call to start sequence
 init();
